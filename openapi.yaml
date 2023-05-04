@@ -1,0 +1,50 @@
+openapi: 3.0.0
+info:
+  title: Audio Waveform Service API
+  description: Service to dynamically produce waveforms for the stems player
+  version: 1.0.0
+
+servers:
+  - url: https://api.example.com/v1
+    description: An example endpoint
+
+paths:
+  /waveform:
+    get:
+      summary: Gets a waveform as json data
+      description: Gets waveform data based on a audio file provided by a URL
+      operationId: getM3u8
+      parameters:
+        - in: query
+          name: sourceUrl
+          required: true
+          schema:
+            type: url
+            example: https://abcdefg01234.cloudfront.net/drums-wav
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+                example: >
+                  {
+                    "version": 2,
+                    "channels": 1,
+                    "sample_rate": 44100,
+                    "samples_per_pixel": 2205,
+                    "bits": 16,
+                    "length": 5018,
+                    "data": [-0.02,-0.02,-0.02,-0.02]
+                  }
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - bearerAuth: []

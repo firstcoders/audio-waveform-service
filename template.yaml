@@ -1,0 +1,154 @@
+AWSTemplateFormatVersion: 2010-09-09
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  A microservice to generate waveforms
+
+  Check out https://github.com/sound-ws/stems-player-documentation/wiki
+  for more information.
+
+Conditions:
+  CreateBucket: !Not [!Equals [!Ref ExistingBucket, true]]
+
+Parameters:
+  # todo more validation
+  # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/parameters-section-structure.html
+  LogLevel:
+    Type: String
+    Description: The log level
+    Default: 'error'
+    AllowedValues:
+      - debug
+      - info
+      - error
+  StageName:
+    Type: String
+    Description: The api gateway stage name
+    Default: 'prd'
+    AllowedValues:
+      - dev
+      - uat
+      - prd
+  SwsSecret:
+    Type: String
+    Description: The shared JWT secret used to authenticate to the service.
+    Default: ''
+    NoEcho: true
+    # MinLength: 16
+    # MaxLength: 32
+  BucketName:
+    Type: String
+    Description: The bucket where to store the waveform data cache
+  ExistingBucket:
+    Type: String
+    Description: Whether to create the waveform bucket
+    AllowedValues:
+      - true
+      - false
+    Default: 'false'
+  CORSAllowedOrigins:
+    Type: String
+    Description: The allowed origin header value to return
+    Default: ''
+  AudiowaveformLayerArn:
+    Type: String
+    Description: The arn of the lambda layer containing audiowaveform static binaries
+  AllowedAudioOrigins:
+    Type: CommaDelimitedList
+    Description: Comma-delimited list of origins from which the service can fetch audio
+    Default: '*'
+
+Globals:
+  Api:
+    OpenApiVersion: 3.0.1
+  Function:
+    Timeout: 30
+    Runtime: nodejs14.x
+    MemorySize: 256
+    CodeUri: src
+    Environment:
+      Variables:
+        LOG_LEVEL: !Ref LogLevel
+        WAVEFORM_BUCKET_NAME: !Ref BucketName
+        SWS_SECRET: !Ref SwsSecret
+        CORS_ALLOWED_ORIGINS: !Ref CORSAllowedOrigins
+        AUDIOWAVEFORM_BIN_PAH: /opt/bin/audiowaveform
+        ALLOWED_AUDIO_ORIGINS: !Join [',', !Ref AllowedAudioOrigins]
+
+Resources:
+  ServiceApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: !Ref StageName
+      # https://github.com/aws/serverless-application-model/releases/tag/v1.46.0
+      # https://github.com/aws/serverless-application-model/pull/2298
+      ApiKeySourceType: AUTHORIZER
+      Auth:
+        DefaultAuthorizer: BearerTokenAuthorizer
+        AddDefaultAuthorizerToCorsPreflight: false
+        Authorizers:
+          BearerTokenAuthorizer:
+            FunctionArn: !GetAtt AuthBearerTokenFunction.Arn
+            ReauthorizeEvery: 300
+      Cors:
+        AllowMethods: "'POST, GET'"
+        AllowHeaders: "'*'"
+        AllowOrigin: "'*'"
+        MaxAge: "'86400'"
+      GatewayResponses:
+        DEFAULT_4XX:
+          ResponseParameters:
+            Headers:
+              Access-Control-Expose-Headers: "'*'"
+              Access-Control-Allow-Origin: "'*'"
+        DEFAULT_5XX:
+          ResponseParameters:
+            Headers:
+              Access-Control-Expose-Headers: "'*'"
+              Access-Control-Allow-Origin: "'*'"
+
+  AuthBearerTokenFunction:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Description: Authorizer using a bearer token contained in the authorization header
+      Handler: handlers/authorizeBearerToken.handler
+
+  GetWaveformFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Description: Gets waveform data based on a audio file provided by a URL
+      Handler: handlers/getWaveform.handler
+      Layers:
+        - !Ref AudiowaveformLayerArn
+      Events:
+        GetWaveform:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ServiceApi
+            Path: /
+            Method: get
+      Policies:
+        - S3CrudPolicy:
+            BucketName: !Ref BucketName
+
+  WaveformBucket:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Retain
+    Condition: CreateBucket
+    Properties:
+      BucketName: !Ref BucketName
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+
+Outputs:
+  ApiId:
+    Description: 'The API Gateway id'
+    Value: !Ref ServiceApi
+  ServiceApi:
+    Description: 'API Gateway endpoint URL'
+    Value: !Sub 'https://${ServiceApi}.execute-api.${AWS::Region}.amazonaws.com/${StageName}/'
+  ServiceDomain:
+    Description: 'API Gateway domain'
+    Value: !Sub '${ServiceApi}.execute-api.${AWS::Region}.amazonaws.com'

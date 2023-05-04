@@ -1,0 +1,89 @@
+{
+  "name": "@soundws/audio-waveform-service",
+  "license": "AGPL-3.0-or-later",
+  "version": "3.0.0-beta.5",
+  "description": "A serverless microservice to generate waveform data from a audio file",
+  "author": "The First Coders Team (https://www.firstcoders.co.uk)",
+  "email": "support@firstcoders.co.uk",
+  "bugs": "https://github.com/sound-ws/audio-waveform-service/issues",
+  "homepage": "https://www.sound.ws/products/stem-player",
+  "contributors": [
+    {
+      "name": "Mark Cremer",
+      "email": "mark@firstcoders.co.uk",
+      "url": "http://www.firstcoders.co.uk"
+    }
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ],
+  "directories": {
+    "test": "test",
+    "example": "examples"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sound-ws/audio-waveform-service.git"
+  },
+  "keywords": [
+    "serverless",
+    "AWS SAM",
+    "waveform"
+  ],
+  "engines": {
+    "node": ">=14"
+  },
+  "devDependencies": {
+    "@aws-sdk/client-s3": "^3.135.0",
+    "@babel/cli": "^7.21.0",
+    "@babel/core": "^7.21.4",
+    "@babel/eslint-parser": "^7.21.3",
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/plugin-proposal-decorators": "^7.21.0",
+    "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
+    "@babel/plugin-transform-runtime": "^7.21.4",
+    "@babel/polyfill": "^7.8.7",
+    "@babel/preset-env": "^7.21.4",
+    "@babel/register": "^7.21.0",
+    "@babel/runtime": "^7.21.0",
+    "babel-loader": "^9.1.2",
+    "babel-plugin-istanbul": "^6.1.1",
+    "core-js": "^3.30.1",
+    "eslint": "^8.19.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.4.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.7.1",
+    "babel-jest": "^29.5.0",
+    "eslint-plugin-jest": "^26.5.3",
+    "jest": "^28.1.2",
+    "aws-sam-webpack-plugin": "^0.11.0",
+    "copy-webpack-plugin": "^10.2.4",
+    "license-webpack-plugin": "^4.0.2",
+    "terser-webpack-plugin": "^5.3.3",
+    "webpack": "^5.73.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-node-externals": "^3.0.0",
+    "@soundws/service-libs": "^1.3.0-beta.5",
+    "array-normalize": "^2.0.0",
+    "axios": "^0.26.0",
+    "jsonwebtoken": "^9.0.0",
+    "lint-staged": "^13.0.3",
+    "widdershins": "^4.0.1",
+    "winston": "^3.7.2"
+  },
+  "scripts": {
+    "test": "jest tests/",
+    "build": "npm run build:docs && npm run build:dist",
+    "build:dist": "rm -rf .aws-sam dist && webpack --mode production && cp -R .aws-sam/build dist",
+    "build:docs": "rimraf docs/ && mkdir docs/ && npx widdershins --environment widdershins.json openapi.yaml -o docs/api.md",
+    "prepublishOnly": "yarn build",
+    "qa": "eslint \"src/**/*.js\"",
+    "precommit": "lint-staged"
+  }
+}
