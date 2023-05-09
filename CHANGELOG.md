@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-beta.8](https://github.com/sound-ws/audio-waveform-service/compare/@soundws/audio-waveform-service@3.0.0-beta.7...@soundws/audio-waveform-service@3.0.0-beta.8) (2023-05-09)
+
+
+### Features
+
+* **audio-waveform-service:** performance boost by removing etag functionality at the expense of revalidation ([8c4d2f1](https://github.com/sound-ws/audio-waveform-service/commit/8c4d2f1c0e9a4a3d8691f4e1d40fd6b643a1972d))
+
+
+
+
+
 # [3.0.0-beta.7](https://github.com/sound-ws/audio-waveform-service/compare/@soundws/audio-waveform-service@3.0.0-beta.6...@soundws/audio-waveform-service@3.0.0-beta.7) (2023-05-09)
 
 
