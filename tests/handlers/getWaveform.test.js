@@ -19,20 +19,6 @@ describe('getWaveform', () => {
     });
   });
 
-  describe('when the upstream etag cannot be fetched', () => {
-    it('returns a 400 with error message', async () => {
-      getEtag.mockRejectedValue(new Error());
-
-      const response = await handler({
-        queryStringParameters: {
-          sourceUrl: 'https://get-it-here.com/my-audio-file.mp3',
-        },
-      });
-      expect(response.statusCode).toBe(400);
-      expect(response.body).toMatch(/etag/);
-    });
-  });
-
   describe('when the waveform is already cached on s3', () => {
     it('reads the data from s3 and returns it in the response', async () => {
       getEtag.mockResolvedValue('thisisanetag');

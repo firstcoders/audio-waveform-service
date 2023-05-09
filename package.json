@@ -1,7 +1,7 @@
 {
   "name": "@soundws/audio-waveform-service",
   "license": "AGPL-3.0-or-later",
-  "version": "3.0.0-beta.6",
+  "version": "3.0.0-beta.7",
   "description": "A serverless microservice to generate waveform data from a audio file",
   "author": "The First Coders Team (https://www.firstcoders.co.uk)",
   "email": "support@firstcoders.co.uk",
@@ -50,7 +50,7 @@
     "@babel/preset-env": "^7.21.4",
     "@babel/register": "^7.21.0",
     "@babel/runtime": "^7.21.0",
-    "@soundws/service-libs": "^1.3.0-beta.6",
+    "@soundws/service-libs": "^1.3.0-beta.7",
     "array-normalize": "^2.0.0",
     "aws-sam-webpack-plugin": "^0.11.0",
     "axios": "^0.26.0",

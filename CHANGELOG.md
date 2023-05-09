@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-beta.7](https://github.com/sound-ws/audio-waveform-service/compare/@soundws/audio-waveform-service@3.0.0-beta.6...@soundws/audio-waveform-service@3.0.0-beta.7) (2023-05-09)
+
+
+### Bug Fixes
+
+* **audio-waveform-service:** fix for bundling esm dependency. Set babel to module auto ([20baf4f](https://github.com/sound-ws/audio-waveform-service/commit/20baf4feef809317ea77203a6ca9f80313343ba5))
+
+
+
+
+
 # [3.0.0-beta.6](https://github.com/sound-ws/audio-waveform-service/compare/@soundws/audio-waveform-service@3.0.0-beta.5...@soundws/audio-waveform-service@3.0.0-beta.6) (2023-05-04)
 
 **Note:** Version bump only for package @soundws/audio-waveform-service

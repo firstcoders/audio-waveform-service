@@ -15,17 +15,16 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 import { unlinkSync } from 'fs';
-import { createHash } from 'crypto';
 import {
   createHandler,
   downloadFile,
   s3WriteFile,
   s3ReadFile,
-  getEtag,
   logger,
   getCorsHeaders,
 } from '@soundws/service-libs';
 import generateWaveform from '../libs/generateWaveform';
+import getCacheKey from '../services/getCacheKey';
 import config from '../config';
 
 const createBadRequestResponse = (errors) => ({
@@ -90,20 +89,7 @@ const handleRequest = async (event) => {
     ]);
   }
 
-  let etag;
-  try {
-    etag = await getEtag(sourceUrl);
-  } catch (error) {
-    return createBadRequestResponse([
-      {
-        property: 'sourceUrl',
-        message: 'the sourceUrl did not provide an etag header',
-      },
-    ]);
-  }
-
-  const { hostname, pathname } = new URL(sourceUrl);
-  const cacheKey = createHash('md5').update(`${hostname}:${pathname}:${etag}`).digest('hex');
+  const cacheKey = getCacheKey(sourceUrl);
   const s3Key = `${config.s3FolderPrefix}/${cacheKey}.json`;
   const tmpfilepath = `/tmp/${cacheKey}`;
   const waveformfilepath = `${tmpfilepath}.json`;
