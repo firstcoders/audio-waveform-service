@@ -15,7 +15,7 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 import { spawnSync } from 'child_process';
-import logger from '@soundws/service-libs/src/logger';
+import { logger } from '@soundws/service-libs';
 import { readFileSync } from 'fs';
 import normalize from 'array-normalize';
 import config from '../config';
