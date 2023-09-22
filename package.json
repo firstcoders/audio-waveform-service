@@ -35,7 +35,7 @@
     "waveform"
   ],
   "engines": {
-    "node": ">=14"
+    "node": ">=18"
   },
   "devDependencies": {
     "@aws-sdk/client-s3": "^3.135.0",
