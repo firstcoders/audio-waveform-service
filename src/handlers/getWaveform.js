@@ -118,7 +118,7 @@ const handleRequest = async (event) => {
     try {
       // generate the waveform
       waveformJson = JSON.stringify(
-        generateWaveform(tmpfilepath, waveformfilepath, { inputFormat })
+        generateWaveform(tmpfilepath, waveformfilepath, { inputFormat }),
       );
     } catch (error2) {
       return createBadRequestResponse([

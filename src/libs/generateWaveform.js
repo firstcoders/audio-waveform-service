@@ -41,7 +41,7 @@ export default (inputpath, outputpath, options = {}) => {
       {
         stdio: 'pipe',
         encoding: 'utf-8',
-      }
+      },
     );
 
     if (result.error || result.status > 0) {
