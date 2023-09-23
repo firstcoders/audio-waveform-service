@@ -152,3 +152,17 @@ Outputs:
   ServiceDomain:
     Description: 'API Gateway domain'
     Value: !Sub '${ServiceApi}.execute-api.${AWS::Region}.amazonaws.com'
+
+Metadata:
+  AWS::ServerlessRepo::Application:
+    Name: soundws-audio-waveform-service
+    Description: >
+      A serverless microservice to generate waveforms based on a audio file provided by a URL
+    Author: Team First Coders
+    ReadmeUrl: README.md
+    SpdxLicenseId: AGPL-3.0-or-later
+    LicenseUrl: LICENSE
+    Labels: ['layer', 'lambda', 'serverless', 'waveform']
+    HomePageUrl: https://github.com/sound-ws/audio-waveform-service
+    SourceCodeUrl: https://github.com/sound-ws/audio-waveform-service
+    SemanticVersion: 1.0.0 # overwritten by sam publish cli command

@@ -1,7 +1,7 @@
 {
   "name": "@soundws/audio-waveform-service",
   "license": "AGPL-3.0-or-later",
-  "version": "3.0.1-beta.2",
+  "version": "3.0.1-beta.3",
   "description": "A serverless microservice to generate waveform data from a audio file",
   "author": "The First Coders Team (https://www.firstcoders.co.uk)",
   "email": "support@firstcoders.co.uk",
@@ -45,7 +45,7 @@
     "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
     "@babel/preset-env": "^7.22.20",
     "@babel/runtime": "^7.22.15",
-    "@soundws/service-libs": "^1.3.1-beta.0",
+    "@soundws/service-libs": "^1.3.1-beta.1",
     "array-normalize": "^2.0.0",
     "aws-sam-webpack-plugin": "^0.13.0",
     "axios": "^0.26.0",
@@ -72,11 +72,12 @@
   },
   "scripts": {
     "test": "jest tests/",
-    "build": "npm run build:docs && npm run build:dist",
+    "build": "npm run build:docs && npm run build:dist && sam build",
     "build:dist": "rm -rf .aws-sam dist && webpack --mode production && cp -R .aws-sam/build dist",
     "build:docs": "rimraf docs/ && mkdir docs/ && npx widdershins --environment widdershins.json openapi.yaml -o docs/api.md",
     "prepublishOnly": "yarn build",
     "qa": "eslint \"src/**/*.js\"",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "sam:publish": "sam package --template-file .aws-sam/build/template.yaml --output-template-file .aws-sam/build/packaged.yaml --s3-bucket $AWS_SAM_PACKAGE_BUCKET_NAME --region ${AWS_REGION:=us-east-1} && sam publish --template .aws-sam/build/packaged.yaml --region ${AWS_REGION:=us-east-1} --semantic-version $npm_package_version"
   }
 }
