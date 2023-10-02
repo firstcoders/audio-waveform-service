@@ -15,7 +15,7 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 import { spawnSync } from 'child_process';
-import { logger } from '@soundws/service-libs';
+import logger from '@soundws/service-libs/src/logger';
 import { readFileSync } from 'fs';
 import normalize from 'array-normalize';
 import config from '../config';
@@ -45,7 +45,11 @@ export default (inputpath, outputpath, options = {}) => {
     );
 
     if (result.error || result.status > 0) {
-      throw new Error('Generate waveform command failed with status', { status: result.status });
+      logger.error('Generate waveform command failed', {
+        error: result.error,
+        status: result.status,
+      });
+      throw new Error('Generate waveform command failed');
     }
 
     const contents = readFileSync(outputpath, 'utf-8');
@@ -61,7 +65,12 @@ export default (inputpath, outputpath, options = {}) => {
         .map((e) => Math.round(e * 100, 2) / 100), // we return a normalized representation, rounded to 2 decimals
     };
   } catch (error) {
-    logger.error('Failed generating waveform file', { inputpath, outputpath, options });
+    logger.error('Failed generating waveform file', {
+      inputpath,
+      outputpath,
+      options,
+      error: error.message,
+    });
     throw error;
   }
 };

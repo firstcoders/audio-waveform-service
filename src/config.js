@@ -19,8 +19,6 @@ export default {
   stage: process.env.STAGE,
   // The log level
   logLevel: process.env.LOG_LEVEL,
-  // The auth secret
-  swsSecret: process.env.SWS_SECRET,
   // The binary
   audiowaveformBinPath: process.env.AUDIOWAVEFORM_BIN_PAH,
   // The storage bucket
@@ -31,8 +29,4 @@ export default {
   allowedAudioOrigins: (process.env.ALLOWED_AUDIO_ORIGINS || '*').split(',').map((s) => s.trim()),
   // the folder prefix of the generated waveform json on s3
   s3FolderPrefix: 'sound-ws/waveform-srv/waveforms',
-  // JWT audience to verify in the JWT
-  jwtAudience: 'api.sound.ws',
-  // The JWT algorithms allowed. See https://github.com/auth0/node-jsonwebtoken#algorithms-supported
-  jwtAllowedAlgorithms: ['HS256'],
 };

@@ -1,4 +1,7 @@
-import { getEtag, s3ReadFile, downloadFile } from '@soundws/service-libs';
+// import { getEtag, s3ReadFile, downloadFile } from '@soundws/service-libs';
+import getEtag from '@soundws/service-libs/src/getEtag';
+import s3ReadFile from '@soundws/service-libs/src/s3ReadFile';
+import downloadFile from '@soundws/service-libs/src/downloadFile';
 import { handler } from '../../src/handlers/getWaveform';
 import generateWaveform from '../../src/libs/generateWaveform';
 import config from '../../src/config';

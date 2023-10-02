@@ -44,7 +44,7 @@ Parameters:
     AllowedValues:
       - true
       - false
-    Default: 'false'
+    Default: false
   CORSAllowedOrigins:
     Type: String
     Description: The allowed origin header value to return
@@ -56,6 +56,9 @@ Parameters:
     Type: CommaDelimitedList
     Description: Comma-delimited list of origins from which the service can fetch audio
     Default: '*'
+  AuthorizerArn:
+    Type: String
+    Description: The ARN of a lambda authorizer
 
 Globals:
   Api:
@@ -87,7 +90,7 @@ Resources:
         AddDefaultAuthorizerToCorsPreflight: false
         Authorizers:
           BearerTokenAuthorizer:
-            FunctionArn: !GetAtt AuthBearerTokenFunction.Arn
+            FunctionArn: !Ref AuthorizerArn
             ReauthorizeEvery: 300
       Cors:
         AllowMethods: "'POST, GET'"
@@ -106,12 +109,6 @@ Resources:
               Access-Control-Expose-Headers: "'*'"
               Access-Control-Allow-Origin: "'*'"
 
-  AuthBearerTokenFunction:
-    Type: 'AWS::Serverless::Function'
-    Properties:
-      Description: Authorizer using a bearer token contained in the authorization header
-      Handler: handlers/authorizeBearerToken.handler
-
   GetWaveformFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -129,10 +126,25 @@ Resources:
       Policies:
         - S3CrudPolicy:
             BucketName: !Ref BucketName
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: esm
+        OutExtension:
+          - .js=.mjs
+        Target: 'es2020'
+        Sourcemap: false
+        EntryPoints:
+          - handlers/getWaveform.js
+        External:
+          - '@aws-sdk'
+        Banner:
+          - js=import { createRequire } from 'module'; const require = createRequire(import.meta.url);
 
   WaveformBucket:
     Type: AWS::S3::Bucket
     DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
     Condition: CreateBucket
     Properties:
       BucketName: !Ref BucketName

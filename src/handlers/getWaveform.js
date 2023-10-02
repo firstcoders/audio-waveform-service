@@ -15,14 +15,12 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 import { unlinkSync } from 'fs';
-import {
-  createHandler,
-  downloadFile,
-  s3WriteFile,
-  s3ReadFile,
-  logger,
-  getCorsHeaders,
-} from '@soundws/service-libs';
+import createHandler from '@soundws/service-libs/src/createHandler';
+import downloadFile from '@soundws/service-libs/src/downloadFile';
+import s3WriteFile from '@soundws/service-libs/src/s3WriteFile';
+import s3ReadFile from '@soundws/service-libs/src/s3ReadFile';
+import logger from '@soundws/service-libs/src/logger';
+import getCorsHeaders from '@soundws/service-libs/src/getCorsHeaders';
 import generateWaveform from '../libs/generateWaveform';
 import getCacheKey from '../services/getCacheKey';
 import config from '../config';
@@ -117,10 +115,11 @@ const handleRequest = async (event) => {
 
     try {
       // generate the waveform
-      waveformJson = JSON.stringify(
-        generateWaveform(tmpfilepath, waveformfilepath, { inputFormat }),
-      );
+      const waveformData = generateWaveform(tmpfilepath, waveformfilepath, { inputFormat });
+      waveformJson = JSON.stringify(waveformData);
     } catch (error2) {
+      logger.error('Failed to generate the waveform', { error: error.message });
+
       return createBadRequestResponse([
         {
           property: 'sourceUrl',
