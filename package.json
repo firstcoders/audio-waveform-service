@@ -49,6 +49,8 @@
     "@babel/preset-env": "^7.22.20",
     "array-normalize": "^2.0.0",
     "babel-jest": "^29.7.0",
+    "esbuild": "^0.19.4",
+    "esbuild-plugin-license": "^1.2.2",
     "eslint": "^8.50.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^9.0.0",
@@ -61,7 +63,8 @@
   },
   "scripts": {
     "test": "jest tests/",
-    "build": "sam build",
+    "build": "sam build && npm run build:licenses",
+    "build:licenses": "node build/3rd-party-licenses.mjs",
     "qa": "eslint \"src/**/*.js\" && sam validate --lint",
     "precommit": "lint-staged",
     "prepublishOnly": "npm run build",
