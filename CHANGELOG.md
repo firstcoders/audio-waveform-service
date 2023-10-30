@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.1-beta.7](https://github.com/sound-ws/audio-waveform-service/compare/@soundws/audio-waveform-service@3.0.1-beta.6...@soundws/audio-waveform-service@3.0.1-beta.7) (2023-10-30)
+
+
+### Bug Fixes
+
+* **waveform-service:** removed swssecret CF param ([4015bec](https://github.com/sound-ws/audio-waveform-service/commit/4015bec6c68f5c41b3d028af65ad8a5acb235366))
+
+
+
+
+
 ## [3.0.1-beta.6](https://github.com/sound-ws/audio-waveform-service/compare/@soundws/audio-waveform-service@3.0.1-beta.5...@soundws/audio-waveform-service@3.0.1-beta.6) (2023-10-02)
 
 **Note:** Version bump only for package @soundws/audio-waveform-service
