@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.1-beta.10](https://github.com/sound-ws/audio-waveform-service/compare/@soundws/audio-waveform-service@3.0.1-beta.9...@soundws/audio-waveform-service@3.0.1-beta.10) (2023-11-16)
+
+**Note:** Version bump only for package @soundws/audio-waveform-service
+
 ## [3.0.1-beta.9](https://github.com/sound-ws/audio-waveform-service/compare/@soundws/audio-waveform-service@3.0.1-beta.8...@soundws/audio-waveform-service@3.0.1-beta.9) (2023-11-09)
 
 **Note:** Version bump only for package @soundws/audio-waveform-service
