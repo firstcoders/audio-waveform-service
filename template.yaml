@@ -24,10 +24,6 @@ Parameters:
     Type: String
     Description: The api gateway stage name
     Default: 'prd'
-    AllowedValues:
-      - dev
-      - uat
-      - prd
   BucketName:
     Type: String
     Description: The bucket where to store the waveform data cache
