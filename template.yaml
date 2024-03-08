@@ -109,7 +109,7 @@ Resources:
           Type: Api
           Properties:
             RestApiId: !Ref ServiceApi
-            Path: /
+            Path: /waveform
             Method: get
       Policies:
         - S3CrudPolicy:
