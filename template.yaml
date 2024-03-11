@@ -154,6 +154,12 @@ Outputs:
   ServiceDomain:
     Description: 'API Gateway domain'
     Value: !Sub '${ServiceApi}.execute-api.${AWS::Region}.amazonaws.com'
+  GetWaveformFunctionArn:
+    Description: The ARN of the getwaveform function
+    Value: !GetAtt GetWaveformFunction.Arn
+  GetWaveformFunctionRoleArn:
+    Description: The ARN of the getwaveform function role
+    Value: !GetAtt GetWaveformFunctionRole.Arn
 
 Metadata:
   AWS::ServerlessRepo::Application:
