@@ -15,12 +15,12 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 import { unlinkSync } from 'fs';
-import createHandler from '@soundws/service-libs/src/createHandler';
-import downloadFile from '@soundws/service-libs/src/downloadFile';
-import s3WriteFile from '@soundws/service-libs/src/s3WriteFile';
-import s3ReadFile from '@soundws/service-libs/src/s3ReadFile';
-import logger from '@soundws/service-libs/src/logger';
-import getCorsHeaders from '@soundws/service-libs/src/getCorsHeaders';
+import createHandler from '@firstcoders/service-libs/src/createHandler';
+import downloadFile from '@firstcoders/service-libs/src/downloadFile';
+import s3WriteFile from '@firstcoders/service-libs/src/s3WriteFile';
+import s3ReadFile from '@firstcoders/service-libs/src/s3ReadFile';
+import logger from '@firstcoders/service-libs/src/logger';
+import getCorsHeaders from '@firstcoders/service-libs/src/getCorsHeaders';
 import generateWaveform from '../libs/generateWaveform';
 import getCacheKey from '../services/getCacheKey';
 import config from '../config';

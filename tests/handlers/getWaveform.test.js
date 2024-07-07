@@ -1,17 +1,17 @@
-// import { getEtag, s3ReadFile, downloadFile } from '@soundws/service-libs';
-import getEtag from '@soundws/service-libs/src/getEtag';
-import s3ReadFile from '@soundws/service-libs/src/s3ReadFile';
-import downloadFile from '@soundws/service-libs/src/downloadFile';
+// import { getEtag, s3ReadFile, downloadFile } from '@firstcoders/service-libs';
+import getEtag from '@firstcoders/service-libs/src/getEtag';
+import s3ReadFile from '@firstcoders/service-libs/src/s3ReadFile';
+import downloadFile from '@firstcoders/service-libs/src/downloadFile';
 import { handler } from '../../src/handlers/getWaveform';
 import generateWaveform from '../../src/libs/generateWaveform';
 import config from '../../src/config';
 
-jest.mock('@soundws/service-libs/src/getEtag');
-jest.mock('@soundws/service-libs/src/s3ReadFile');
-jest.mock('@soundws/service-libs/src/s3WriteFile');
-jest.mock('@soundws/service-libs/src/downloadFile');
+jest.mock('@firstcoders/service-libs/src/getEtag');
+jest.mock('@firstcoders/service-libs/src/s3ReadFile');
+jest.mock('@firstcoders/service-libs/src/s3WriteFile');
+jest.mock('@firstcoders/service-libs/src/downloadFile');
 jest.mock('../../src/libs/generateWaveform');
-jest.mock('@soundws/service-libs/src/logger');
+jest.mock('@firstcoders/service-libs/src/logger');
 
 describe('getWaveform', () => {
   describe('when no valid sourceUrl is provided', () => {

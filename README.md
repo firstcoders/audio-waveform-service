@@ -13,13 +13,13 @@ Installation of this service requires an AWS account and IAM credentials with ap
 # Installation
 
 ```shell
-npm install @soundws/audio-waveform-service
+npm install @firstcoders/audio-waveform-service
 ```
 
 or using yarn
 
 ```shell
-yarn add @soundws/audio-waveform-service
+yarn add @firstcoders/audio-waveform-service
 ```
 
 # Deployment

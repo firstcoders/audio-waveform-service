@@ -2,7 +2,7 @@ import { spawnSync } from 'child_process';
 import { readFileSync } from 'fs';
 import generateWaveform from '../../src/libs/generateWaveform';
 
-jest.mock('@soundws/service-libs/src/logger');
+jest.mock('@firstcoders/service-libs/src/logger');
 jest.mock('child_process', () => ({
   spawnSync: jest.fn(),
 }));
