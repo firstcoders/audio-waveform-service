@@ -1,5 +1,6 @@
 {
   "name": "@firstcoders/audio-waveform-service",
+  "private": true,
   "license": "AGPL-3.0-or-later",
   "version": "3.0.3-beta.4",
   "description": "A serverless microservice to generate waveform data from a audio file",
