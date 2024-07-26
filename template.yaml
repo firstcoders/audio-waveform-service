@@ -163,7 +163,7 @@ Outputs:
 
 Metadata:
   AWS::ServerlessRepo::Application:
-    Name: firstcoders-audio-waveform-service
+    Name: fc-audio-waveform-service
     Description: >
       A serverless microservice to generate waveforms based on a audio file provided by a URL
     Author: Team First Coders
