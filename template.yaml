@@ -48,6 +48,10 @@ Parameters:
   AuthorizerArn:
     Type: String
     Description: The ARN of a lambda authorizer
+  S3FolderPrefix:
+    Type: String
+    Description: A prefix under which the generated files will be stored
+    Default: 'waveform-srv'
 
 Globals:
   Api:
@@ -64,6 +68,7 @@ Globals:
         CORS_ALLOWED_ORIGINS: !Ref CORSAllowedOrigins
         AUDIOWAVEFORM_BIN_PAH: /opt/bin/audiowaveform
         ALLOWED_AUDIO_ORIGINS: !Join [',', !Ref AllowedAudioOrigins]
+        S3_FOLDER_PREFIX: !Ref S3FolderPrefix
 
 Resources:
   ServiceApi:

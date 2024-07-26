@@ -28,5 +28,5 @@ export default {
   // List of origins from which the service can fetch audio
   allowedAudioOrigins: (process.env.ALLOWED_AUDIO_ORIGINS || '*').split(',').map((s) => s.trim()),
   // the folder prefix of the generated waveform json on s3
-  s3FolderPrefix: 'sound-ws/waveform-srv/waveforms',
+  s3FolderPrefix: process.env.S3_FOLDER_PREFIX || 'waveform-srv',
 };
