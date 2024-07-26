@@ -3,7 +3,7 @@ Transform: AWS::Serverless-2016-10-31
 Description: >
   A microservice to generate waveforms
 
-  Check out https://github.com/sound-ws/stems-player-documentation/wiki
+  Check out https://github.com/firstcoders/stems-player-documentation/wiki
   for more information.
 
 Conditions:
@@ -171,6 +171,6 @@ Metadata:
     SpdxLicenseId: AGPL-3.0-or-later
     LicenseUrl: LICENSE
     Labels: ['layer', 'lambda', 'serverless', 'waveform']
-    HomePageUrl: https://github.com/sound-ws/audio-waveform-service
-    SourceCodeUrl: https://github.com/sound-ws/audio-waveform-service
+    HomePageUrl: https://github.com/firstcoders/audio-waveform-service
+    SourceCodeUrl: https://github.com/firstcoders/audio-waveform-service
     SemanticVersion: 1.0.0 # overwritten by sam publish cli command
