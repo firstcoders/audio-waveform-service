@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.4-beta.0](https://github.com/firstcoders/audio-waveform-service/compare/@firstcoders/audio-waveform-service@3.0.3...@firstcoders/audio-waveform-service@3.0.4-beta.0) (2024-11-28)
+
+**Note:** Version bump only for package @firstcoders/audio-waveform-service
+
+
+
+
+
 ## [3.0.3](https://github.com/firstcoders/audio-waveform-service/compare/@firstcoders/audio-waveform-service@3.0.3-beta.6...@firstcoders/audio-waveform-service@3.0.3) (2024-07-26)
 
 **Note:** Version bump only for package @firstcoders/audio-waveform-service
